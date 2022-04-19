@@ -1,6 +1,8 @@
 # Moon Rune Demolisher
 Auto-translates specific Dark Souls game files with google translate.
 
+Updated to work with ER and serialized paramdefs
+
 ## What It Do
 * Command line only!
 * Can translate loose param files. Use Yabber to unbind the parambnd files first.
