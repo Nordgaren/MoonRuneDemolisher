@@ -1206,12 +1206,12 @@
         </member>
         <member name="F:SoulsFormats.BHD5.Game.DarkSouls3">
             <summary>
-            Dark Souls 3 on PC.
+            Dark Souls 3 and Sekiro on PC.
             </summary>
         </member>
-        <member name="F:SoulsFormats.BHD5.Game.Sekiro">
+        <member name="F:SoulsFormats.BHD5.Game.EldenRing">
             <summary>
-            Sekiro on PC.
+            Elden Ring on PC.
             </summary>
         </member>
         <member name="T:SoulsFormats.BHD5.Bucket">
@@ -1336,12 +1336,22 @@
         </member>
         <member name="T:SoulsFormats.BTAB">
             <summary>
-            A DS3 and BB file that seems to modify material parameters to light certain static objects. Used to darken objects in shadows for example.
+            A lightmap atlasing config file introduced in DS2. Extension: .btab
             </summary>
         </member>
-        <member name="F:SoulsFormats.BTAB.Entries">
+        <member name="P:SoulsFormats.BTAB.BigEndian">
             <summary>
-            Entries in this BTAB.
+            Whether the file is big-endian; true for PS3/X360, false otherwise.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTAB.LongFormat">
+            <summary>
+            Whether the file uses the 64-bit format; true for DS3/BB, false for DS2.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTAB.Entries">
+            <summary>
+            Material configs in this file.
             </summary>
         </member>
         <member name="M:SoulsFormats.BTAB.Read(SoulsFormats.BinaryReaderEx)">
@@ -1356,42 +1366,37 @@
         </member>
         <member name="T:SoulsFormats.BTAB.Entry">
             <summary>
-            A BTAB entry.
+            Configures lightmap atlasing for a certain part and material.
             </summary>
         </member>
-        <member name="F:SoulsFormats.BTAB.Entry.MSBPartName">
+        <member name="P:SoulsFormats.BTAB.Entry.PartName">
             <summary>
-            The name of the target part defined in the MSB file
+            The name of the target part defined in an MSB file.
             </summary>
         </member>
-        <member name="F:SoulsFormats.BTAB.Entry.FLVERMaterialName">
+        <member name="P:SoulsFormats.BTAB.Entry.MaterialName">
             <summary>
-            The name of a material in the FLVER; not the name of the MTD file itself.
+            The name of the target material in the part's FLVER model.
             </summary>
         </member>
-        <member name="F:SoulsFormats.BTAB.Entry.Unk1C">
+        <member name="P:SoulsFormats.BTAB.Entry.AtlasID">
             <summary>
-            Unknown.
+            The ID of the atlas texture to use.
             </summary>
         </member>
-        <member name="F:SoulsFormats.BTAB.Entry.Unk20">
+        <member name="P:SoulsFormats.BTAB.Entry.UVOffset">
             <summary>
-            Unknown.
+            Offsets the lightmap UVs.
             </summary>
         </member>
-        <member name="F:SoulsFormats.BTAB.Entry.Unk24">
+        <member name="P:SoulsFormats.BTAB.Entry.UVScale">
             <summary>
-            Unknown.
+            Scales the lightmap UVs.
             </summary>
         </member>
-        <member name="F:SoulsFormats.BTAB.Entry.Unk28">
+        <member name="M:SoulsFormats.BTAB.Entry.#ctor">
             <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.BTAB.Entry.Unk2C">
-            <summary>
-            Unknown.
+            Creates an Entry with default values.
             </summary>
         </member>
         <member name="M:SoulsFormats.BTAB.Entry.ToString">
@@ -1460,21 +1465,6 @@
             </summary>
         </member>
         <member name="P:SoulsFormats.BTL.Light.Unk00">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.BTL.Light.Unk04">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.BTL.Light.Unk08">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.BTL.Light.Unk0C">
             <summary>
             Unknown.
             </summary>
@@ -1666,37 +1656,42 @@
         </member>
         <member name="P:SoulsFormats.BTL.Light.UnkC8">
             <summary>
-            Unknown; only in Sekiro.
+            Unknown; not present before Sekiro.
             </summary>
         </member>
         <member name="P:SoulsFormats.BTL.Light.UnkCC">
             <summary>
-            Unknown; only in Sekiro.
+            Unknown; not present before Sekiro.
             </summary>
         </member>
         <member name="P:SoulsFormats.BTL.Light.UnkD0">
             <summary>
-            Unknown; only in Sekiro.
+            Unknown; not present before Sekiro.
             </summary>
         </member>
         <member name="P:SoulsFormats.BTL.Light.UnkD4">
             <summary>
-            Unknown; only in Sekiro.
+            Unknown; not present before Sekiro.
             </summary>
         </member>
         <member name="P:SoulsFormats.BTL.Light.UnkD8">
             <summary>
-            Unknown; only in Sekiro.
+            Unknown; not present before Sekiro.
             </summary>
         </member>
         <member name="P:SoulsFormats.BTL.Light.UnkDC">
             <summary>
-            Unknown; only in Sekiro.
+            Unknown; not present before Sekiro.
             </summary>
         </member>
         <member name="P:SoulsFormats.BTL.Light.UnkE0">
             <summary>
-            Unknown; only in Sekiro.
+            Unknown; not present before Sekiro.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTL.Light.UnkE4">
+            <summary>
+            Unknown; not present before Sekiro.
             </summary>
         </member>
         <member name="M:SoulsFormats.BTL.Light.#ctor">
@@ -1712,6 +1707,196 @@
         <member name="M:SoulsFormats.BTL.Light.ToString">
             <summary>
             Returns the name of the light.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.BTPB">
+            <summary>
+            A collection of spherical harmonics light probes for lighting characters and objects in a map. Extension: .btpb
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Version">
+            <summary>
+            Indicates the format of the file and supported features.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Unk1C">
+            <summary>
+            Unknown; probably bounding box min.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Unk28">
+            <summary>
+            Unknown; probably bounding box max.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Groups">
+            <summary>
+            Groups of light probes in the map.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.BTPB.#ctor">
+            <summary>
+            Creates an empty BTPB formatted for Dark Souls 3.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.BTPB.Read(SoulsFormats.BinaryReaderEx)">
+            <summary>
+            Deserializes file data from a stream.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.BTPB.Write(SoulsFormats.BinaryWriterEx)">
+            <summary>
+            Serializes file data to a stream.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.BTPB.BTPBVersion">
+            <summary>
+            Supported BTPB formats.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.BTPB.BTPBVersion.DarkSouls2LE">
+            <summary>
+            Dark Souls 2 on PC and SotFS on all platforms.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.BTPB.BTPBVersion.DarkSouls2BE">
+            <summary>
+            Dark Souls 2 on PS3 and X360.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.BTPB.BTPBVersion.Bloodborne">
+            <summary>
+            Bloodborne.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.BTPB.BTPBVersion.DarkSouls3">
+            <summary>
+            Dark Souls 3 on all platforms.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.BTPB.Group">
+            <summary>
+            A volume containing light probes with some additional configuration.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Name">
+            <summary>
+            An optional name for the group. Presence appears to be indicated by the lowest bit of Flags08.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Flags08">
+            <summary>
+            Appears to be flags, highly speculative.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk10">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk14">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk18">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk1C">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk20">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk24">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk28">
+            <summary>
+            Unknown; probably bounding box min.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk34">
+            <summary>
+            Unknown; probably bounding box max.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Probes">
+            <summary>
+            Light probes in this group.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk48">
+            <summary>
+            Unknown; only present since DS3.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk4C">
+            <summary>
+            Unknown; only present since DS3.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk50">
+            <summary>
+            Unknown; only present since DS3.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk94">
+            <summary>
+            Unknown; only present since DS3.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk95">
+            <summary>
+            Unknown; only present since DS3.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Group.Unk96">
+            <summary>
+            Unknown; only present since DS3.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.BTPB.Group.#ctor">
+            <summary>
+            Creates an empty Group with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.BTPB.Probe">
+            <summary>
+            A probe giving directional lighting information at a given point.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Probe.Coefficients">
+            <summary>
+            First-order spherical harmonics coefficients in R0G0B0R1G1B1... order.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Probe.LightMask">
+            <summary>
+            Multiplies sun lighting, where 0 is 0% sun and 1024 is 100%.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Probe.Unk1A">
+            <summary>
+            Unknown; always 0 outside the chalice BTPB.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.BTPB.Probe.Position">
+            <summary>
+            The position of the probe; not present in DS2.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.BTPB.Probe.#ctor">
+            <summary>
+            Creates a Probe with default values.
             </summary>
         </member>
         <member name="T:SoulsFormats.CCM">
@@ -1966,7 +2151,7 @@
         </member>
         <member name="F:SoulsFormats.DCX.Type.DCP_DFLT">
             <summary>
-            DCP header, default compression. Used in DeS test maps.
+            DCP header, deflate compression. Used in DeS test maps.
             </summary>
         </member>
         <member name="F:SoulsFormats.DCX.Type.DCX_EDGE">
@@ -1992,6 +2177,11 @@
         <member name="F:SoulsFormats.DCX.Type.DCX_DFLT_11000_44_9">
             <summary>
             DCX header, deflate compression. Used in Sekiro.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DCX.Type.DCX_DFLT_11000_44_9_15">
+            <summary>
+            DCX header, deflate compression. Used in the ER regulation.
             </summary>
         </member>
         <member name="F:SoulsFormats.DCX.Type.DCX_KRAK">
@@ -2034,734 +2224,174 @@
             Most common compression format for Sekiro.
             </summary>
         </member>
+        <member name="F:SoulsFormats.DCX.DefaultType.EldenRing">
+            <summary>
+            Most common compression format for Elden Ring.
+            </summary>
+        </member>
         <member name="T:SoulsFormats.DRB">
             <summary>
-            A UI configuration format used in DS1.
+            A UI configuration format used until DS2. Extension: .drb
             </summary>
         </member>
-        <member name="P:SoulsFormats.DRB.DSR">
-            <summary>
-            If true, Shapes have scaling information.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Textures">
-            <summary>
-            Available UI textures for reference; not actually necessary for textures to work.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.AnipBytes">
-            <summary>
-            Unknown data used by Aniks.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.IntpBytes">
-            <summary>
-            Unknown data used by Aniks.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anims">
+        <member name="T:SoulsFormats.DRB.Anik">
             <summary>
             Unknown.
             </summary>
         </member>
-        <member name="P:SoulsFormats.DRB.Scdls">
+        <member name="P:SoulsFormats.DRB.Anik.Name">
+            <summary>
+            The name of this Anik.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Anik.Unk04">
             <summary>
             Unknown.
             </summary>
         </member>
-        <member name="P:SoulsFormats.DRB.Dlgs">
+        <member name="P:SoulsFormats.DRB.Anik.Unk08">
             <summary>
-            Groups of UI elements.
+            Unknown; always 0-1.
             </summary>
         </member>
-        <member name="P:SoulsFormats.DRB.Item(System.String)">
+        <member name="P:SoulsFormats.DRB.Anik.Unk09">
             <summary>
-            Returns the element group with the given name, or null if not found.
+            Unknown; always 1-2.
             </summary>
         </member>
-        <member name="T:SoulsFormats.DRB.Texture">
+        <member name="P:SoulsFormats.DRB.Anik.Unk0A">
             <summary>
-            A texture available to be referenced by UI elements.
+            Unknown; always 0.
             </summary>
         </member>
-        <member name="P:SoulsFormats.DRB.Texture.Name">
+        <member name="P:SoulsFormats.DRB.Anik.IntpOffset">
             <summary>
-            A friendly name for the texture.
+            An offset into the INTP block.
             </summary>
         </member>
-        <member name="P:SoulsFormats.DRB.Texture.Path">
+        <member name="P:SoulsFormats.DRB.Anik.AnipOffset">
             <summary>
-            The network path to the texture.
+            An offset into the ANIP block.
             </summary>
         </member>
-        <member name="M:SoulsFormats.DRB.Texture.#ctor">
+        <member name="P:SoulsFormats.DRB.Anik.Unk14">
             <summary>
-            Creates a Texture with default values.
+            Unknown; always 0.
             </summary>
         </member>
-        <member name="M:SoulsFormats.DRB.Texture.#ctor(System.String,System.String)">
+        <member name="P:SoulsFormats.DRB.Anik.Unk18">
             <summary>
-            Creates a Texture with the given name and path.
+            Unknown; always 0.
             </summary>
         </member>
-        <member name="M:SoulsFormats.DRB.Texture.ToString">
+        <member name="P:SoulsFormats.DRB.Anik.Unk1C">
             <summary>
-            Returns the name and path of the texture.
+            Unknown; always 0.
             </summary>
         </member>
-        <member name="T:SoulsFormats.DRB.ShapeType">
+        <member name="M:SoulsFormats.DRB.Anik.ToString">
             <summary>
-            Possible types of a UI element.
+            Returns the name of this Anik.
             </summary>
         </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.Dialog">
-            <summary>
-            References another element group attached to this element.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.GouraudRect">
-            <summary>
-            A rectangle with color interpolated between each corner.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.GouraudSprite">
-            <summary>
-            Presumably a sprite with interpolated coloring.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.Mask">
+        <member name="T:SoulsFormats.DRB.Anim">
             <summary>
             Unknown.
             </summary>
         </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.MonoFrame">
+        <member name="P:SoulsFormats.DRB.Anim.Name">
+            <summary>
+            The name of this Anim.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Anim.Anios">
+            <summary>
+            Anios in this Anim.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Anim.Unk0C">
             <summary>
             Unknown.
             </summary>
         </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.MonoRect">
+        <member name="P:SoulsFormats.DRB.Anim.Unk10">
             <summary>
-            A rectangle with a solid color.
+            Unknown; always 4.
             </summary>
         </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.Null">
+        <member name="P:SoulsFormats.DRB.Anim.Unk14">
             <summary>
-            An invisible element used to mark a position.
+            Unknown; always 4.
             </summary>
         </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.ScrollText">
+        <member name="P:SoulsFormats.DRB.Anim.Unk18">
             <summary>
-            A scrolling text field.
+            Unknown; always 4.
             </summary>
         </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.Sprite">
-            <summary>
-            Displays a region of a texture.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.ShapeType.Text">
-            <summary>
-            A fixed text field.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape">
-            <summary>
-            Describes the appearance of a UI element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.LeftEdge">
-            <summary>
-            Left bound of this element, relative to 1280x720.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TopEdge">
-            <summary>
-            Top bound of this element, relative to 1280x720.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.RightEdge">
-            <summary>
-            Right bound of this element, relative to 1280x720.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.BottomEdge">
-            <summary>
-            Bottom bound of this element, relative to 1280x720.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.ScalingOriginX">
-            <summary>
-            For DSR, the X coordinate which the element scales relative to.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.ScalingOriginY">
-            <summary>
-            For DSR, the Y coordinate which the element scales relative to.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.ScalingType">
-            <summary>
-            For DSR, the behavior of scaling for this element.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.ToString">
-            <summary>
-            Returns the type and bounds of this Shape.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.Dialog">
-            <summary>
-            References another element group attached to this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Dialog.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Dialog.Dlg">
-            <summary>
-            Dlg referenced by this element; must be found in the DRB's Dlg list.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Dialog.Unk02">
-            <summary>
-            Unknown; always 0 or 1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Dialog.Unk03">
+        <member name="P:SoulsFormats.DRB.Anim.Unk1C">
             <summary>
             Unknown; always 1.
             </summary>
         </member>
-        <member name="P:SoulsFormats.DRB.Shape.Dialog.Unk04">
+        <member name="P:SoulsFormats.DRB.Anim.Unk20">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Anim.Unk24">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Anim.Unk28">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Anim.Unk2C">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Anim.#ctor">
+            <summary>
+            Creates an Anim with default values.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Anim.ToString">
+            <summary>
+            Returns the name and number of Anios.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Anio">
             <summary>
             Unknown.
             </summary>
         </member>
-        <member name="P:SoulsFormats.DRB.Shape.Dialog.Unk08">
+        <member name="P:SoulsFormats.DRB.Anio.Unk00">
             <summary>
             Unknown.
             </summary>
         </member>
-        <member name="P:SoulsFormats.DRB.Shape.Dialog.Unk0C">
+        <member name="P:SoulsFormats.DRB.Anio.Aniks">
+            <summary>
+            Aniks in this Anio.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Anio.Unk0C">
             <summary>
             Unknown.
             </summary>
         </member>
-        <member name="M:SoulsFormats.DRB.Shape.Dialog.#ctor">
+        <member name="M:SoulsFormats.DRB.Anio.#ctor">
             <summary>
-            Creates a Dialog with default values.
+            Creates an Anio with default values.
             </summary>
         </member>
-        <member name="T:SoulsFormats.DRB.Shape.GouraudRect">
+        <member name="M:SoulsFormats.DRB.Anio.ToString">
             <summary>
-            A rectangle with color interpolated between each corner.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.Unk00">
-            <summary>
-            Unknown; always 1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.TopLeftColor">
-            <summary>
-            The color of the top left corner of the rectangle.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.TopRightColor">
-            <summary>
-            The color of the top right corner of the rectangle.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.BottomRightColor">
-            <summary>
-            The color of the bottom right corner of the rectangle.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.BottomLeftColor">
-            <summary>
-            The color of the bottom left corner of the rectangle.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.GouraudRect.#ctor">
-            <summary>
-            Creates a GouraudRect with default values.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.GouraudSprite">
-            <summary>
-            Presumably a sprite with interpolated coloring.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.Unk00">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.Unk04">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.Unk08">
-            <summary>
-            Unknown; always -1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.Unk0A">
-            <summary>
-            Unknown; always 256.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.TopLeftColor">
-            <summary>
-            The color of the top left corner of the sprite.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.TopRightColor">
-            <summary>
-            The color of the top right corner of the sprite.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.BottomRightColor">
-            <summary>
-            The color of the bottom right corner of the sprite.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.BottomLeftColor">
-            <summary>
-            The color of the bottom left corner of the sprite.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.GouraudSprite.#ctor">
-            <summary>
-            Creates a GouraudSprite with default values.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.Mask">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Mask.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk00">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk04">
-            <summary>
-            Unknown; always 1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk08">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk0C">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk0D">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk0E">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.Mask.#ctor">
-            <summary>
-            Creates a Mask with default values.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.MonoFrame">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.Unk00">
-            <summary>
-            Unknown; always 1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.Unk01">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.Unk02">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.Unk03">
-            <summary>
-            Unknown; always 1-3.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.Unk04">
-            <summary>
-            Unknown; always 0-7.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.Unk08">
-            <summary>
-            Unknown; possibly a color.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.MonoFrame.#ctor">
-            <summary>
-            Creates a MonoFrame with default values.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.MonoRect">
-            <summary>
-            A rectangle with a solid color.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoRect.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoRect.Unk00">
-            <summary>
-            Unknown; always 1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoRect.PaletteColor">
-            <summary>
-            Chooses a color from a palette of 1-80, or 0 to use a custom color.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.MonoRect.CustomColor">
-            <summary>
-            When PaletteColor is 0, specifies the color of the rectangle.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.MonoRect.#ctor">
-            <summary>
-            Creates a MonoRect with default values.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.Null">
-            <summary>
-            An invisible element used to mark a position.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Null.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.Null.#ctor">
-            <summary>
-            Creates a Null with default values.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.ScrollText">
-            <summary>
-            A scrolling text field.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.ScrollText.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.ScrollText.Unk1C">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.ScrollText.Unk20">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.ScrollText.Unk24">
-            <summary>
-            Unknown; always 15 or 100.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.ScrollText.Unk28">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.ScrollText.Unk2C">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.ScrollText.#ctor">
-            <summary>
-            Creates a ScrollText with default values.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.SpriteFlags">
-            <summary>
-            Indicates the display properties of a Sprite.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.SpriteFlags.None">
-            <summary>
-            No modification.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.SpriteFlags.RotateCW">
-            <summary>
-            Rotate texture 90 degrees clockwise.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.SpriteFlags.Rotate180">
-            <summary>
-            Rotate texture 180 degrees.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.SpriteFlags.FlipVertical">
-            <summary>
-            Flip texture vertically.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.SpriteFlags.FlipHorizontal">
-            <summary>
-            Flip texture horizontally.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.SpriteFlags.Alpha">
-            <summary>
-            Allow alpha transparency.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.SpriteFlags.Overlay">
-            <summary>
-            Overlay the texture on the underlying visual.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.Sprite">
-            <summary>
-            Displays a region of a texture.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Sprite.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Sprite.TexLeftEdge">
-            <summary>
-            Left bound of the texture region displayed by this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Sprite.TexTopEdge">
-            <summary>
-            Top bound of the texture region displayed by this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Sprite.TexRightEdge">
-            <summary>
-            Right bound of the texture region displayed by this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Sprite.TexBottomEdge">
-            <summary>
-            Bottom bound of the texture region displayed by this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Sprite.TextureIndex">
-            <summary>
-            The texture to display, indexing textures in menu.tpf.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Sprite.Flags">
-            <summary>
-            Flags modifying how the texture is displayed.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Sprite.PaletteColor">
-            <summary>
-            Tints the sprite from a palette of 1-80, or 0 to use custom color below.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Sprite.CustomColor">
-            <summary>
-            Tints the sprite a certain color.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.Sprite.#ctor">
-            <summary>
-            Creates a Sprite with default values.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.AlignFlags">
-            <summary>
-            Indicates the positioning of text within its element.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.TopLeft">
-            <summary>
-            Anchor to top left.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.Right">
-            <summary>
-            Anchor to right side.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.CenterHorizontal">
-            <summary>
-            Center horizontally.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.Bottom">
-            <summary>
-            Anchor to bottom side.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.CenterVertical">
-            <summary>
-            Center vertically.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.TxtType">
-            <summary>
-            Indicates the source of a text element's text.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.TxtType.Literal">
-            <summary>
-            Text is a literal value stored in the DRB.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.TxtType.FMG">
-            <summary>
-            Text is a static FMG ID.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.DRB.Shape.TxtType.Dynamic">
-            <summary>
-            Text is assigned at runtime.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.Text">
-            <summary>
-            A fixed text field.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Text.Type">
-            <summary>
-            The type of this element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Text.Unk1C">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.Text.Unk20">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Shape.Text.#ctor">
-            <summary>
-            Creates a Text with default values.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Shape.TextBase">
-            <summary>
-            Either a fixed text or scrolling text element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.Unk00">
-            <summary>
-            Unknown; always 0-2.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.Unk01">
-            <summary>
-            Unknown; always 1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.LineSpacing">
-            <summary>
-            Distance between each line of text.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.PaletteColor">
-            <summary>
-            Chooses a color from a palette of 1-80, or 0 to use a custom color.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.CustomColor">
-            <summary>
-            When PaletteColor is 0, specifies the color of the text.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.FontSize">
-            <summary>
-            From 0-11, different sizes of the menu font. 12 is the subtitle font.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.Alignment">
-            <summary>
-            The horizontal and vertical alignment of the text.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.TextType">
-            <summary>
-            Whether the element uses a text literal, a static FMG ID, or is assigned at runtime.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.Unk10">
-            <summary>
-            Unknown; always 0x1C.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.CharLength">
-            <summary>
-            The maximum characters to display.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.TextLiteral">
-            <summary>
-            If TextType is Literal, the text to display, otherwise null.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Shape.TextBase.TextID">
-            <summary>
-            If TextType is FMG, the FMG ID to display, otherwise -1.
+            Returns the number of Aniks in this Anio.
             </summary>
         </member>
         <member name="T:SoulsFormats.DRB.ControlType">
@@ -2889,346 +2519,6 @@
             Creates a Static with default values.
             </summary>
         </member>
-        <member name="T:SoulsFormats.DRB.Anik">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.Name">
-            <summary>
-            The name of this Anik.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.Unk04">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.Unk08">
-            <summary>
-            Unknown; always 0-1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.Unk09">
-            <summary>
-            Unknown; always 1-2.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.Unk0A">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.IntpOffset">
-            <summary>
-            An offset into the INTP block.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.AnipOffset">
-            <summary>
-            An offset into the ANIP block.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.Unk14">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.Unk18">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anik.Unk1C">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Anik.ToString">
-            <summary>
-            Returns the name of this Anik.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Anio">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anio.Unk00">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anio.Aniks">
-            <summary>
-            Aniks in this Anio.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anio.Unk0C">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Anio.#ctor">
-            <summary>
-            Creates an Anio with default values.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Anio.ToString">
-            <summary>
-            Returns the number of Aniks in this Anio.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Anim">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Name">
-            <summary>
-            The name of this Anim.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Anios">
-            <summary>
-            Anios in this Anim.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Unk0C">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Unk10">
-            <summary>
-            Unknown; always 4.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Unk14">
-            <summary>
-            Unknown; always 4.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Unk18">
-            <summary>
-            Unknown; always 4.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Unk1C">
-            <summary>
-            Unknown; always 1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Unk20">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Unk24">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Unk28">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Anim.Unk2C">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Anim.#ctor">
-            <summary>
-            Creates an Anim with default values.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Anim.ToString">
-            <summary>
-            Returns the name and number of Anios.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Scdk">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdk.Name">
-            <summary>
-            The name of this Scdk.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdk.Unk04">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdk.Unk08">
-            <summary>
-            Unknown; always 1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdk.Unk0C">
-            <summary>
-            Unknown; always 0-1.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdk.Unk14">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdk.Unk18">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdk.Unk1C">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdk.AnimIndex">
-            <summary>
-            An index into the Anim list.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdk.Scdp04">
-            <summary>
-            Unknown; always 0-1.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Scdk.#ctor">
-            <summary>
-            Creates a Scdk with default values.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Scdk.ToString">
-            <summary>
-            Returns the name of this Scdk.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Scdo">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdo.Name">
-            <summary>
-            The name of this Scdo.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdo.Scdks">
-            <summary>
-            Scdks in this Scdo.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdo.Unk0C">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Scdo.#ctor">
-            <summary>
-            Creates a Scdo with default values.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Scdo.ToString">
-            <summary>
-            Returns the name and number of Scdks.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Scdl">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdl.Name">
-            <summary>
-            The name of this Scdl.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdl.Scdos">
-            <summary>
-            Scdos in this Scdl.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Scdl.Unk0C">
-            <summary>
-            Unknown.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Scdl.#ctor">
-            <summary>
-            Creates a Scdl with default values.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Scdl.ToString">
-            <summary>
-            Returns the name and number of Scdos.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.DRB.Dlgo">
-            <summary>
-            An individual UI element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Dlgo.Name">
-            <summary>
-            The name of the element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Dlgo.Shape">
-            <summary>
-            The visual properties of the element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Dlgo.Control">
-            <summary>
-            The behavior of the element.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Dlgo.Unk0C">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Dlgo.Unk10">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Dlgo.Unk14">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Dlgo.Unk18">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.DRB.Dlgo.Unk1C">
-            <summary>
-            Unknown; always 0.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Dlgo.#ctor">
-            <summary>
-            Creates a Dlgo with default values.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Dlgo.#ctor(System.String,SoulsFormats.DRB.Shape,SoulsFormats.DRB.Control)">
-            <summary>
-            Creates a Dlgo with the given values.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.DRB.Dlgo.ToString">
-            <summary>
-            Returns the name, shape type, and control type of the element.
-            </summary>
-        </member>
         <member name="T:SoulsFormats.DRB.Dlg">
             <summary>
             A group of UI elements, which is itself a UI element.
@@ -3294,6 +2584,131 @@
             Returns the name, number of child elements, shape type, and control type of this group.
             </summary>
         </member>
+        <member name="T:SoulsFormats.DRB.Dlgo">
+            <summary>
+            An individual UI element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Dlgo.Name">
+            <summary>
+            The name of the element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Dlgo.Shape">
+            <summary>
+            The visual properties of the element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Dlgo.Control">
+            <summary>
+            The behavior of the element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Dlgo.Unk0C">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Dlgo.Unk10">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Dlgo.Unk14">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Dlgo.Unk18">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Dlgo.Unk1C">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Dlgo.#ctor">
+            <summary>
+            Creates a Dlgo with default values.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Dlgo.#ctor(System.String,SoulsFormats.DRB.Shape)">
+            <summary>
+            Creates a Dlgo with the given values and a default control.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Dlgo.#ctor(System.String,SoulsFormats.DRB.Shape,SoulsFormats.DRB.Control)">
+            <summary>
+            Creates a Dlgo with the given values.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Dlgo.ToString">
+            <summary>
+            Returns the name, shape type, and control type of the element.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.DRBVersion">
+            <summary>
+            Supported versions of the DRB format.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.DRBVersion.DarkSouls">
+            <summary>
+            Dark Souls, Demon's Souls, and Shadow Assault: Tenchu
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.DRBVersion.DarkSoulsRemastered">
+            <summary>
+            Dark Souls Remastered; adds scaling information to shapes.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Version">
+            <summary>
+            The version of the format used for this file.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.BigEndian">
+            <summary>
+            True for PS3/X360, false otherwise.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Textures">
+            <summary>
+            Available UI textures for reference; not actually necessary for textures to work.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.AnipBytes">
+            <summary>
+            Unknown data used by Aniks.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.IntpBytes">
+            <summary>
+            Unknown data used by Aniks.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Anims">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdls">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Dlgs">
+            <summary>
+            Groups of UI elements.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Item(System.String)">
+            <summary>
+            Returns the element group with the given name, or null if not found.
+            </summary>
+        </member>
         <member name="F:SoulsFormats.DRB.Compression">
             <summary>
             The type of DCX compression to be used when writing.
@@ -3309,12 +2724,12 @@
             Returns true if the file appears to be a DRB.
             </summary>
         </member>
-        <member name="M:SoulsFormats.DRB.Read(System.Byte[],System.Boolean)">
+        <member name="M:SoulsFormats.DRB.Read(System.Byte[],SoulsFormats.DRB.DRBVersion)">
             <summary>
             Loads a DRB from a byte array, automatically decompressing it if necessary.
             </summary>
         </member>
-        <member name="M:SoulsFormats.DRB.Read(System.String,System.Boolean)">
+        <member name="M:SoulsFormats.DRB.Read(System.String,SoulsFormats.DRB.DRBVersion)">
             <summary>
             Loads a DRB from the specified path, automatically decompressing it if necessary.
             </summary>
@@ -3342,6 +2757,796 @@
         <member name="M:SoulsFormats.DRB.Write(System.String,SoulsFormats.DCX.Type)">
             <summary>
             Writes the file to the specified path, compressing it as specified.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Scdk">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdk.Name">
+            <summary>
+            The name of this Scdk.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdk.Unk04">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdk.Unk08">
+            <summary>
+            Unknown; always 1.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdk.Unk0C">
+            <summary>
+            Unknown; always 0-1.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdk.Unk14">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdk.Unk18">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdk.Unk1C">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdk.AnimIndex">
+            <summary>
+            An index into the Anim list.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdk.Scdp04">
+            <summary>
+            Unknown; always 0-1.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Scdk.#ctor">
+            <summary>
+            Creates a Scdk with default values.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Scdk.ToString">
+            <summary>
+            Returns the name of this Scdk.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Scdl">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdl.Name">
+            <summary>
+            The name of this Scdl.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdl.Scdos">
+            <summary>
+            Scdos in this Scdl.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdl.Unk0C">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Scdl.#ctor">
+            <summary>
+            Creates a Scdl with default values.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Scdl.ToString">
+            <summary>
+            Returns the name and number of Scdos.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Scdo">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdo.Name">
+            <summary>
+            The name of this Scdo.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdo.Scdks">
+            <summary>
+            Scdks in this Scdo.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Scdo.Unk0C">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Scdo.#ctor">
+            <summary>
+            Creates a Scdo with default values.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Scdo.ToString">
+            <summary>
+            Returns the name and number of Scdks.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape">
+            <summary>
+            Describes the appearance of a UI element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.LeftEdge">
+            <summary>
+            Left bound of this element, relative to 1280x720.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TopEdge">
+            <summary>
+            Top bound of this element, relative to 1280x720.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.RightEdge">
+            <summary>
+            Right bound of this element, relative to 1280x720.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.BottomEdge">
+            <summary>
+            Bottom bound of this element, relative to 1280x720.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.ScalingOriginX">
+            <summary>
+            For DSR, the X coordinate which the element scales relative to.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.ScalingOriginY">
+            <summary>
+            For DSR, the Y coordinate which the element scales relative to.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.ScalingMode">
+            <summary>
+            For DSR, the behavior of scaling for this element.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.ToString">
+            <summary>
+            Returns the type and bounds of this Shape.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.BlendingMode">
+            <summary>
+            Color blending mode of various shapes.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.BlendingMode.Opaque">
+            <summary>
+            No transparency.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.BlendingMode.Alpha">
+            <summary>
+            Alpha transparency.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.BlendingMode.Add">
+            <summary>
+            Color is added to the underlying color value.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.BlendingMode.Subtract">
+            <summary>
+            Color is subtracted from the underlying color value.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.SpriteOrientation">
+            <summary>
+            Rotation and mirroring properties of a Sprite.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.SpriteOrientation.None">
+            <summary>
+            No modification.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.SpriteOrientation.RotateCW">
+            <summary>
+            Rotate texture 90 degrees clockwise.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.SpriteOrientation.Rotate180">
+            <summary>
+            Rotate texture 180 degrees.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.SpriteOrientation.FlipVertical">
+            <summary>
+            Flip texture vertically.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.SpriteOrientation.FlipHorizontal">
+            <summary>
+            Flip texture horizontally.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.SpriteBase">
+            <summary>
+            Displays a region of a texture.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.SpriteBase.TexLeftEdge">
+            <summary>
+            Left bound of the texture region displayed by this element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.SpriteBase.TexTopEdge">
+            <summary>
+            Top bound of the texture region displayed by this element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.SpriteBase.TexRightEdge">
+            <summary>
+            Right bound of the texture region displayed by this element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.SpriteBase.TexBottomEdge">
+            <summary>
+            Bottom bound of the texture region displayed by this element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.SpriteBase.TextureIndex">
+            <summary>
+            The texture to display, indexing menu.tpf.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.SpriteBase.Orientation">
+            <summary>
+            Flags modifying the orientation of the texture.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.SpriteBase.BlendMode">
+            <summary>
+            Color blending mode.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.AlignFlags">
+            <summary>
+            Indicates the positioning of text within its element.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.TopLeft">
+            <summary>
+            Anchor to top left.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.Right">
+            <summary>
+            Anchor to right side.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.CenterHorizontal">
+            <summary>
+            Center horizontally.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.Bottom">
+            <summary>
+            Anchor to bottom side.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.AlignFlags.CenterVertical">
+            <summary>
+            Center vertically.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.TxtType">
+            <summary>
+            Indicates the source of a text element's text.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.TxtType.Literal">
+            <summary>
+            Text is a literal value stored in the DRB.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.TxtType.FMG">
+            <summary>
+            Text is a static FMG ID.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.DRB.Shape.TxtType.Dynamic">
+            <summary>
+            Text is assigned at runtime.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.TextBase">
+            <summary>
+            Either a fixed text or scrolling text element.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.BlendMode">
+            <summary>
+            Color blending mode.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.LineSpacing">
+            <summary>
+            Distance between each line of text.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.PaletteColor">
+            <summary>
+            Index of a color in the menu color param, or 0 to use the CustomColor.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.CustomColor">
+            <summary>
+            Custom color used when PaletteColor is 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.FontSize">
+            <summary>
+            From 0-11, different sizes of the menu font. 12 is the subtitle font.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.Alignment">
+            <summary>
+            The horizontal and vertical alignment of the text.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.TextType">
+            <summary>
+            Whether the element uses a text literal, a static FMG ID, or is assigned at runtime.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.CharLength">
+            <summary>
+            The maximum characters to display.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.TextLiteral">
+            <summary>
+            If TextType is Literal, the text to display, otherwise null.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.TextID">
+            <summary>
+            If TextType is FMG, the FMG ID to display, otherwise -1.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.Unknown">
+            <summary>
+            An unknown optional structure which is always present in practice.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.TextBase.UnknownA">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.UnknownA.Unk00">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.UnknownA.SubUnknown">
+            <summary>
+            Unknown optional structure, null if not present.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.TextBase.UnknownA.#ctor">
+            <summary>
+            Creates an UnknownA with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.TextBase.UnknownB">
+            <summary>
+            Unknown structure only observed in Shadow Assault: Tenchu.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.UnknownB.Unk00">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.UnknownB.Unk04">
+            <summary>
+            Unknown; always 0xFF.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.UnknownB.Unk06">
+            <summary>
+            Unknown; always 0 or 2.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.TextBase.UnknownB.Unk08">
+            <summary>
+            Unknown; always 0 or 2.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.TextBase.UnknownB.#ctor">
+            <summary>
+            Creates an UnknownB with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.Dialog">
+            <summary>
+            Displays another referenced group of elements.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Dialog.Dlg">
+            <summary>
+            Dlg referenced by this element; must be found in the parent DRB's Dlg list.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Dialog.Unk02">
+            <summary>
+            Unknown; always 0 or 1.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Dialog.Unk03">
+            <summary>
+            Unknown; always 0 or 1. Determines whether the optional structure is loaded.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Dialog.PaletteColor">
+            <summary>
+            Index of a color in the menu color param, or 0 to use the CustomColor.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Dialog.CustomColor">
+            <summary>
+            Custom color used when PaletteColor is 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Dialog.Unknown">
+            <summary>
+            An unknown, optional, and unused structure; only loaded if Unk03 is non-zero.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.Dialog.#ctor">
+            <summary>
+            Creates a Dialog with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.Dialog.UnknownA">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Dialog.UnknownA.Unk00">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Dialog.UnknownA.Unk02">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Dialog.UnknownA.Unk04">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.Dialog.UnknownA.#ctor">
+            <summary>
+            Creates an UnknownA with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.GouraudFrame">
+            <summary>
+            A rectangular frame with color interpolated between each corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudFrame.BlendMode">
+            <summary>
+            Color blending mode.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudFrame.Thickness">
+            <summary>
+            Thickness of the border.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudFrame.TopLeftColor">
+            <summary>
+            The color at the top left corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudFrame.TopRightColor">
+            <summary>
+            The color at the top right corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudFrame.BottomRightColor">
+            <summary>
+            The color at the bottom right corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudFrame.BottomLeftColor">
+            <summary>
+            The color at the bottom left corner.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.GouraudFrame.#ctor">
+            <summary>
+            Creates a GouraudFrame with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.GouraudRect">
+            <summary>
+            A rectangle with color interpolated between each corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.BlendMode">
+            <summary>
+            Color blending mode.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.TopLeftColor">
+            <summary>
+            The color at the top left corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.TopRightColor">
+            <summary>
+            The color at the top right corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.BottomRightColor">
+            <summary>
+            The color at the bottom right corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudRect.BottomLeftColor">
+            <summary>
+            The color at the bottom left corner.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.GouraudRect.#ctor">
+            <summary>
+            Creates a GouraudRect with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.GouraudSprite">
+            <summary>
+            Displays a texture region with color interpolated between each corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.TopLeftColor">
+            <summary>
+            The color at the top left corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.TopRightColor">
+            <summary>
+            The color at the top right corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.BottomRightColor">
+            <summary>
+            The color at the bottom right corner.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.GouraudSprite.BottomLeftColor">
+            <summary>
+            The color at the bottom left corner.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.GouraudSprite.#ctor">
+            <summary>
+            Creates a GouraudSprite with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.Mask">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Mask.DlgoName">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk04">
+            <summary>
+            Unknown; always 1.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk05">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk09">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Mask.Unk0D">
+            <summary>
+            Unknown; always 0.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.Mask.#ctor">
+            <summary>
+            Creates a Mask with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.MonoFrame">
+            <summary>
+            A rectangular frame with a solid color.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.BlendMode">
+            <summary>
+            Color blending mode.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.Thickness">
+            <summary>
+            Thickness of the border.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.PaletteColor">
+            <summary>
+            Index of a color in the menu color param, or 0 to use the CustomColor.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.MonoFrame.CustomColor">
+            <summary>
+            Custom color used when PaletteColor is 0.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.MonoFrame.#ctor">
+            <summary>
+            Creates a MonoFrame with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.MonoRect">
+            <summary>
+            A rectangle with a solid color.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.MonoRect.BlendMode">
+            <summary>
+            Color blending mode.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.MonoRect.PaletteColor">
+            <summary>
+            Index of a color in the menu color param, or 0 to use the CustomColor.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.MonoRect.CustomColor">
+            <summary>
+            Custom color used when PaletteColor is 0.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.MonoRect.#ctor">
+            <summary>
+            Creates a MonoRect with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.Null">
+            <summary>
+            An invisible element used to mark a position.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.Null.#ctor">
+            <summary>
+            Creates a Null with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.ScrollText">
+            <summary>
+            A scrolling text field.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.ScrollText.UnkX00">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.ScrollText.UnkX02">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.ScrollText.UnkX04">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.ScrollText.UnkX06">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.ScrollText.ScrollSpeed">
+            <summary>
+            Unknown; always 15 or 100.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.ScrollText.UnkX0A">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.ScrollText.#ctor">
+            <summary>
+            Creates a ScrollText with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.Sprite">
+            <summary>
+            Displays a texture region with color tinting.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Sprite.PaletteColor">
+            <summary>
+            Index of a color in the menu color param, or 0 to use the CustomColor.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Shape.Sprite.CustomColor">
+            <summary>
+            Custom color used when PaletteColor is 0.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.Sprite.#ctor">
+            <summary>
+            Creates a Sprite with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Shape.Text">
+            <summary>
+            A fixed text field.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Shape.Text.#ctor">
+            <summary>
+            Creates a Text with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.DRB.Texture">
+            <summary>
+            A texture available to be referenced by UI elements.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Texture.Name">
+            <summary>
+            A friendly name for the texture.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.DRB.Texture.Path">
+            <summary>
+            The network path to the texture.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Texture.#ctor">
+            <summary>
+            Creates a Texture with default values.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Texture.#ctor(System.String,System.String)">
+            <summary>
+            Creates a Texture with the given name and path.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.DRB.Texture.ToString">
+            <summary>
+            Returns the name and path of the texture.
             </summary>
         </member>
         <member name="T:SoulsFormats.EDD">
@@ -4726,6 +4931,12 @@
             Accesses bone indices as an int[4].
             </summary>
         </member>
+        <member name="M:SoulsFormats.FLVER.VertexBoneIndices.GetEnumerator">
+            <summary>
+            Enumerates through all four bone indicies
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SoulsFormats.FLVER.VertexBoneWeights">
             <summary>
             Four weights for binding a vertex to bones, accessed like an array. Unused bones should be set to 0.
@@ -5381,6 +5592,106 @@
             Points making up the mesh's shape.
             </summary>
         </member>
+        <member name="T:SoulsFormats.FMB">
+            <summary>
+            "expression" files introduced in Elden Ring. Extension: .expb
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.FMB.Unk20">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.FMB.Entries">
+            <summary>
+            Entries in this FMB.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.FMB.#ctor">
+            <summary>
+            Creates a default FMB.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.FMB.Is(SoulsFormats.BinaryReaderEx)">
+            <summary>
+            Checks whether the data appears to be a file of this format.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.FMB.Read(SoulsFormats.BinaryReaderEx)">
+            <summary>
+            Deserializes file data from a stream.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.FMB.Write(SoulsFormats.BinaryWriterEx)">
+            <summary>
+            Serializes file data to a stream.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.FMB.Entry">
+            <summary>
+            An entry with no additional data.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.FMB.Entry.Type">
+            <summary>
+            Type of the entry.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.FMB.Entry.ToString">
+            <summary>
+            Returns a string representation of the entry.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.FMB.StringEntry">
+            <summary>
+            An entry with an additional string.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.FMB.StringEntry.Value">
+            <summary>
+            The additional value of the entry.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.FMB.StringEntry.ToString">
+            <summary>
+            Returns a string representation of the entry.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.FMB.DoubleEntry">
+            <summary>
+            An entry with an additional double.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.FMB.DoubleEntry.Value">
+            <summary>
+            The additional value of the entry.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.FMB.DoubleEntry.ToString">
+            <summary>
+            Returns a string representation of the entry.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.FMB.Double2Entry">
+            <summary>
+            An entry with two additional doubles.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.FMB.Double2Entry.Value1">
+            <summary>
+            The first additional value of the entry.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.FMB.Double2Entry.Value2">
+            <summary>
+            The second additional value of the entry.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.FMB.Double2Entry.ToString">
+            <summary>
+            Returns a string representation of the entry.
+            </summary>
+        </member>
         <member name="T:SoulsFormats.FMG">
             <summary>
             A simple string container used throughout the series.
@@ -6011,6 +6322,161 @@
             Creates a new Goal with the specified values.
             </summary>
         </member>
+        <member name="T:SoulsFormats.MATBIN">
+            <summary>
+            A material config format introduced in Elden Ring. Extension: .matbin
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.ShaderPath">
+            <summary>
+            Network path to the shader source file.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.SourcePath">
+            <summary>
+            Network path to the material source file, either a matxml or an mtd.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Key">
+            <summary>
+            Unknown, presumed to be an identifier for documentation.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Params">
+            <summary>
+            Parameters set by this material.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Samplers">
+            <summary>
+            Texture samplers used by this material.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.MATBIN.#ctor">
+            <summary>
+            Creates an empty MATBIN.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.MATBIN.Is(SoulsFormats.BinaryReaderEx)">
+            <summary>
+            Checks whether the data appears to be a file of this format.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.MATBIN.Read(SoulsFormats.BinaryReaderEx)">
+            <summary>
+            Deserializes file data from a stream.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.MATBIN.Write(SoulsFormats.BinaryWriterEx)">
+            <summary>
+            Serializes file data to a stream.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.MATBIN.ParamType">
+            <summary>
+            Available types for param values.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.MATBIN.ParamType.Bool">
+            <summary>
+            (bool) A 1-byte boolean.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.MATBIN.ParamType.Int">
+            <summary>
+            (int) A 32-bit integer. 
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.MATBIN.ParamType.Int2">
+            <summary>
+            (int[2]) Two 32-bit integers.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.MATBIN.ParamType.Float">
+            <summary>
+            (float) A 32-bit float.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.MATBIN.ParamType.Float2">
+            <summary>
+            (float[2]) Two 32-bit floats.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.MATBIN.ParamType.Float3">
+            <summary>
+            (float[3]) Three 32-bit floats.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.MATBIN.ParamType.Float4">
+            <summary>
+            (float[4]) Four 32-bit floats.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.MATBIN.ParamType.Float5">
+            <summary>
+            (float[5]) Five 32-bit floats.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.MATBIN.Param">
+            <summary>
+            A parameter set per material.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Param.Name">
+            <summary>
+            The name of the parameter.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Param.Value">
+            <summary>
+            The value to be used.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Param.Key">
+            <summary>
+            Unknown, presumed to be an identifier for documentation.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Param.Type">
+            <summary>
+            The type of value provided.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.MATBIN.Param.#ctor">
+            <summary>
+            Creates a default Param.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.MATBIN.Sampler">
+            <summary>
+            A texture sampler used by a material.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Sampler.Type">
+            <summary>
+            The type of the sampler.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Sampler.Path">
+            <summary>
+            An optional network path to the texture, if not specified in the FLVER.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Sampler.Key">
+            <summary>
+            Unknown, presumed to be an identifier for documentation.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MATBIN.Sampler.Unk14">
+            <summary>
+            Unknown; most likely to be the scale, but typically 0, 0.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.MATBIN.Sampler.#ctor">
+            <summary>
+            Creates a default Sampler.
+            </summary>
+        </member>
         <member name="T:SoulsFormats.MCG">
             <summary>
             A navigation format used in DeS and DS1 that defines a coarse graph for moving around the map. Extension: .mcg
@@ -6219,6 +6685,31 @@
         <member name="M:SoulsFormats.MCP.Room.#ctor">
             <summary>
             Creates a Room with default values.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.MQB">
+            <summary>
+            A cutscene definition format used since DS2, short for MovieSequencer Binary. Extension: .mqb
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MQB.Cut.Duration">
+            <summary>
+            Duration of the cut in frames.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MQB.Disposition.Unk08">
+            <summary>
+            Unknown; possibly a timeline index.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MQB.Disposition.Duration">
+            <summary>
+            Duration in frames.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MQB.Timeline.Unk10">
+            <summary>
+            Unknown; possibly a timeline index.
             </summary>
         </member>
         <member name="T:SoulsFormats.IMsb">
@@ -9146,6 +9637,11 @@
             Second item lot given by this treasure; rarely used.
             </summary>
         </member>
+        <member name="P:SoulsFormats.MSB3.Event.Treasure.UnkT18">
+            <summary>
+            Unknown.
+            </summary>
+        </member>
         <member name="P:SoulsFormats.MSB3.Event.Treasure.ActionButtonParamID">
             <summary>
             If not -1, uses an entry from ActionButtonParam for the pickup prompt.
@@ -10694,6 +11190,11 @@
         <member name="P:SoulsFormats.MSB3.Region.SFX.EffectID">
             <summary>
             The ID of the .fxr file to play in this region.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.MSB3.Region.SFX.UnkT04">
+            <summary>
+            Unknown.
             </summary>
         </member>
         <member name="P:SoulsFormats.MSB3.Region.SFX.StartDisabled">
@@ -17227,6 +17728,11 @@
             A 3D model format used in early PS3/X360 games. Extension: .mdl
             </summary>
         </member>
+        <member name="M:SoulsFormats.Other.MDL4.Bone.ComputeLocalTransform">
+            <summary>
+            Creates a transformation matrix from the scale, rotation, and translation of the bone.
+            </summary>
+        </member>
         <member name="T:SoulsFormats.MWC.MDAT">
             <summary>
             Container for model-related files used in Metal Wolf Chaos. Extension: _m.dat
@@ -17732,96 +18238,6 @@
             A companion format to params that describes each field present in the rows. Extension: .def, .paramdef
             </summary>
         </member>
-        <member name="P:SoulsFormats.PARAMDEF.DataVersion">
-            <summary>
-            Indicates a revision of the row data structure.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.PARAMDEF.ParamType">
-            <summary>
-            Identifies corresponding params and paramdefs.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.PARAMDEF.BigEndian">
-            <summary>
-            True for PS3 and X360 games, otherwise false.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.PARAMDEF.Unicode">
-            <summary>
-            If true, strings are written as UTF-16; if false, as Shift-JIS.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.PARAMDEF.FormatVersion">
-            <summary>
-            Determines format of the file.
-            </summary>
-        </member>
-        <member name="P:SoulsFormats.PARAMDEF.Fields">
-            <summary>
-            Fields in each param row, in order of appearance.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.PARAMDEF.#ctor">
-            <summary>
-            Creates a new PARAMDEF formatted for DS1.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.PARAMDEF.Read(SoulsFormats.BinaryReaderEx)">
-            <summary>
-            Deserializes file data from a stream.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.PARAMDEF.Validate(System.Exception@)">
-            <summary>
-            Verifies that the file can be written safely.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.PARAMDEF.Write(SoulsFormats.BinaryWriterEx)">
-            <summary>
-            Serializes file data to a stream.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.PARAMDEF.GetRowSize">
-            <summary>
-            Calculates the size of cell data for each row.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.PARAMDEF.XmlDeserialize(System.String)">
-            <summary>
-            Reads an XML-formatted PARAMDEF from a file.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.PARAMDEF.XmlSerialize(System.String)">
-            <summary>
-            Writes an XML-formatted PARAMDEF to a file using the current XML version.
-            </summary>
-        </member>
-        <member name="M:SoulsFormats.PARAMDEF.XmlSerialize(System.String,System.Int32)">
-            <summary>
-            Writes an XML-formatted PARAMDEF to a file using the given XML version.
-            </summary>
-        </member>
-        <member name="T:SoulsFormats.PARAMDEF.EditFlags">
-            <summary>
-            Flags that control editor behavior for a field.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.PARAMDEF.EditFlags.None">
-            <summary>
-            Value is editable and does not wrap.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.PARAMDEF.EditFlags.Wrap">
-            <summary>
-            Value wraps around when scrolled past the minimum or maximum.
-            </summary>
-        </member>
-        <member name="F:SoulsFormats.PARAMDEF.EditFlags.Lock">
-            <summary>
-            Value may not be edited.
-            </summary>
-        </member>
         <member name="T:SoulsFormats.PARAMDEF.DefType">
             <summary>
             Supported primitive field types.
@@ -17875,6 +18291,26 @@
         <member name="F:SoulsFormats.PARAMDEF.DefType.fixstrW">
             <summary>
             Fixed-width UTF-16 string.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.PARAMDEF.EditFlags">
+            <summary>
+            Flags that control editor behavior for a field.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.PARAMDEF.EditFlags.None">
+            <summary>
+            Value is editable and does not wrap.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.PARAMDEF.EditFlags.Wrap">
+            <summary>
+            Value wraps around when scrolled past the minimum or maximum.
+            </summary>
+        </member>
+        <member name="F:SoulsFormats.PARAMDEF.EditFlags.Lock">
+            <summary>
+            Value may not be edited.
             </summary>
         </member>
         <member name="T:SoulsFormats.PARAMDEF.Field">
@@ -17952,12 +18388,27 @@
             Fields are ordered by this value in the editor; not present before version 104.
             </summary>
         </member>
+        <member name="P:SoulsFormats.PARAMDEF.Field.UnkB8">
+            <summary>
+            Unknown; appears to be an identifier. May be null, only supported in versions >= 200, only present in version 202 so far.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.PARAMDEF.Field.UnkC0">
+            <summary>
+            Unknown; appears to be a param type. May be null, only supported in versions >= 200, only present in version 202 so far.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.PARAMDEF.Field.UnkC8">
+            <summary>
+            Unknown; appears to be a display string. May be null, only supported in versions >= 200, only present in version 202 so far.
+            </summary>
+        </member>
         <member name="M:SoulsFormats.PARAMDEF.Field.#ctor">
             <summary>
             Creates a Field with placeholder values.
             </summary>
         </member>
-        <member name="M:SoulsFormats.PARAMDEF.Field.#ctor(SoulsFormats.PARAMDEF.DefType,System.String)">
+        <member name="M:SoulsFormats.PARAMDEF.Field.#ctor(SoulsFormats.PARAMDEF,SoulsFormats.PARAMDEF.DefType,System.String)">
             <summary>
             Creates a Field with the given type, name, and appropriate default values.
             </summary>
@@ -17965,6 +18416,81 @@
         <member name="M:SoulsFormats.PARAMDEF.Field.ToString">
             <summary>
             Returns a string representation of the field.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.PARAMDEF.DataVersion">
+            <summary>
+            Indicates a revision of the row data structure.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.PARAMDEF.ParamType">
+            <summary>
+            Identifies corresponding params and paramdefs.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.PARAMDEF.BigEndian">
+            <summary>
+            True for PS3 and X360 games, otherwise false.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.PARAMDEF.Unicode">
+            <summary>
+            If true, certain strings are written as UTF-16; if false, as Shift-JIS.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.PARAMDEF.FormatVersion">
+            <summary>
+            Determines format of the file.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.PARAMDEF.VariableEditorValueTypes">
+            <summary>
+            Whether field default, minimum, maximum, and increment may be variable type. If false, they are always floats.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.PARAMDEF.Fields">
+            <summary>
+            Fields in each param row, in order of appearance.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.PARAMDEF.#ctor">
+            <summary>
+            Creates a PARAMDEF formatted for DS1.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.PARAMDEF.Read(SoulsFormats.BinaryReaderEx)">
+            <summary>
+            Deserializes file data from a stream.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.PARAMDEF.Validate(System.Exception@)">
+            <summary>
+            Verifies that the file can be written safely.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.PARAMDEF.Write(SoulsFormats.BinaryWriterEx)">
+            <summary>
+            Serializes file data to a stream.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.PARAMDEF.GetRowSize">
+            <summary>
+            Calculates the size of cell data for each row.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.PARAMDEF.XmlDeserialize(System.String)">
+            <summary>
+            Reads an XML-formatted PARAMDEF from a file.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.PARAMDEF.XmlSerialize(System.String)">
+            <summary>
+            Writes an XML-formatted PARAMDEF to a file using the current XML version.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.PARAMDEF.XmlSerialize(System.String,System.Int32)">
+            <summary>
+            Writes an XML-formatted PARAMDEF to a file using the given XML version.
             </summary>
         </member>
         <member name="T:SoulsFormats.PARAMTDF">
@@ -18120,6 +18646,96 @@
         <member name="M:SoulsFormats.PMDCL.Decal.#ctor(SoulsFormats.PMDCL.Decal)">
             <summary>
             Creates a new Decal with values copied from another.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.RMB">
+            <summary>
+            A collection of controller rumble effects used in all games. Extension: .rmb
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.RMB.BigEndian">
+            <summary>
+            Whether the file is big-endian. True for PS3 and X360, false otherwise.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.RMB.Rumbles">
+            <summary>
+            Available effects; always 256 in vanilla files.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.RMB.#ctor">
+            <summary>
+            Creates an empty RMB.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.RMB.Read(SoulsFormats.BinaryReaderEx)">
+            <summary>
+            Deserializes file data from a stream.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.RMB.Validate(System.Exception@)">
+            <summary>
+            Verifies that there are no null references.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.RMB.Write(SoulsFormats.BinaryWriterEx)">
+            <summary>
+            Serializes file data to a stream.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.RMB.Rumble">
+            <summary>
+            A controller rumble effect.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.RMB.Rumble.HeavyStates">
+            <summary>
+            A sequence of states for the heavy rumble motor.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.RMB.Rumble.LightStates">
+            <summary>
+            A sequence of states for the light rumble motor.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.RMB.Rumble.#ctor">
+            <summary>
+            Creates an empty Rumble.
+            </summary>
+        </member>
+        <member name="T:SoulsFormats.RMB.State">
+            <summary>
+            Defines a sweep of rumble motor strength over a given period of time.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.RMB.State.Start">
+            <summary>
+            The time the state begins, in 30 fps frames.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.RMB.State.Duration">
+            <summary>
+            The duration of the state, in 30 fps frames.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.RMB.State.BeginStrength">
+            <summary>
+            The strength of the motor at the beginning of the state.
+            </summary>
+        </member>
+        <member name="P:SoulsFormats.RMB.State.EndStrength">
+            <summary>
+            The strength of the motor at the end of the state.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.RMB.State.#ctor">
+            <summary>
+            Creates a State with no rumble.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.RMB.State.#ctor(System.Int16,System.Int16,System.Byte,System.Byte)">
+            <summary>
+            Creates a State with the given values.
             </summary>
         </member>
         <member name="T:SoulsFormats.TAE3">
@@ -18595,6 +19211,11 @@
         <member name="M:SoulsFormats.BinaryReaderEx.Pad(System.Int32)">
             <summary>
             Advances the stream position until it meets the specified alignment.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.BinaryReaderEx.PadRelative(System.Int64,System.Int32)">
+            <summary>
+            Advances the stream position until it meets the specified alignment relative to the given starting position.
             </summary>
         </member>
         <member name="M:SoulsFormats.BinaryReaderEx.Skip(System.Int32)">
@@ -19137,6 +19758,11 @@
             Writes 0x00 bytes until the stream position meets the specified alignment.
             </summary>
         </member>
+        <member name="M:SoulsFormats.BinaryWriterEx.PadRelative(System.Int64,System.Int32)">
+            <summary>
+            Writes 0x00 bytes until the stream position meets the specified alignment relative to the given starting position.
+            </summary>
+        </member>
         <member name="M:SoulsFormats.BinaryWriterEx.WriteBoolean(System.Boolean)">
             <summary>
             Writes a one-byte boolean value.
@@ -19477,6 +20103,38 @@
             Writes the file to disk using the given compression type.
             </summary>
         </member>
+        <member name="M:SoulsFormats.Oodle26.OodleLZ_Compress(SoulsFormats.Oodle26.OodleLZ_Compressor,System.Byte[],System.Int64,System.Byte[],SoulsFormats.Oodle26.OodleLZ_CompressionLevel,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int64)">
+            <param name="compressor"></param>
+            <param name="rawBuf"></param>
+            <param name="rawLen"></param>
+            <param name="compBuf"></param>
+            <param name="level"></param>
+            <param name="pOptions">= NULL</param>
+            <param name="dictionaryBase">= NULL</param>
+            <param name="lrm">= NULL</param>
+            <param name="scratchMem">= NULL</param>
+            <param name="scratchSize">= 0</param>
+        </member>
+        <member name="M:SoulsFormats.Oodle26.OodleLZ_CompressOptions_GetDefault(SoulsFormats.Oodle26.OodleLZ_Compressor,SoulsFormats.Oodle26.OodleLZ_CompressionLevel)">
+            <param name="compressor">= OodleLZ_Compressor_Invalid</param>
+            <param name="lzLevel">= OodleLZ_CompressionLevel_Normal</param>
+        </member>
+        <member name="M:SoulsFormats.Oodle26.OodleLZ_Decompress(System.Byte[],System.Int64,System.Byte[],System.Int64,SoulsFormats.Oodle26.OodleLZ_FuzzSafe,SoulsFormats.Oodle26.OodleLZ_CheckCRC,SoulsFormats.Oodle26.OodleLZ_Verbosity,System.IntPtr,System.Int64,System.IntPtr,System.IntPtr,System.IntPtr,System.Int64,SoulsFormats.Oodle26.OodleLZ_Decode_ThreadPhase)">
+            <param name="compBuf"></param>
+            <param name="compBufSize"></param>
+            <param name="rawBuf"></param>
+            <param name="rawLen"></param>
+            <param name="fuzzSafe">= OodleLZ_FuzzSafe_Yes</param>
+            <param name="checkCRC">= OodleLZ_CheckCRC_No</param>
+            <param name="verbosity">= OodleLZ_Verbosity_None</param>
+            <param name="decBufBase">= NULL</param>
+            <param name="decBufSize">= 0</param>
+            <param name="fpCallback">= NULL</param>
+            <param name="callbackUserData">= NULL</param>
+            <param name="decoderMemory">= NULL</param>
+            <param name="decoderMemorySize">= 0</param>
+            <param name="threadPhase">= OodleLZ_Decode_Unthreaded</param>
+        </member>
         <member name="T:SoulsFormats.SFUtil">
             <summary>
             Miscellaneous utility functions for SoulsFormats, mostly for internal use.
@@ -19595,6 +20253,16 @@
         <member name="M:SoulsFormats.SFUtil.EncryptDS3Regulation(System.String,SoulsFormats.BND4)">
             <summary>
             Repacks and encrypts DS3's regulation BND4 to the specified path.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.SFUtil.DecryptERRegulation(System.String)">
+            <summary>
+            Decrypts and unpacks ER's regulation BND4 from the specified path.
+            </summary>
+        </member>
+        <member name="M:SoulsFormats.SFUtil.EncryptERRegulation(System.String,SoulsFormats.BND4)">
+            <summary>
+            Repacks and encrypts ER's regulation BND4 to the specified path.
             </summary>
         </member>
         <member name="T:SoulsFormats.SoulsFile`1">

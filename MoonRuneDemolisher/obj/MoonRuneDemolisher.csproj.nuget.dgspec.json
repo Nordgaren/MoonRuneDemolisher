@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\MoonRuneDemolisher\\MoonRuneDemolisher.csproj": {}
+    "C:\\Users\\Nord\\source\\repos\\MoonRuneDemolisher\\MoonRuneDemolisher\\MoonRuneDemolisher.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\MoonRuneDemolisher\\MoonRuneDemolisher.csproj": {
+    "C:\\Users\\Nord\\source\\repos\\MoonRuneDemolisher\\MoonRuneDemolisher\\MoonRuneDemolisher.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\MoonRuneDemolisher\\MoonRuneDemolisher.csproj",
+        "projectUniqueName": "C:\\Users\\Nord\\source\\repos\\MoonRuneDemolisher\\MoonRuneDemolisher\\MoonRuneDemolisher.csproj",
         "projectName": "MoonRuneDemolisher",
-        "projectPath": "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\MoonRuneDemolisher\\MoonRuneDemolisher.csproj",
-        "packagesPath": "C:\\Users\\dmtin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\MoonRuneDemolisher\\obj\\",
+        "projectPath": "C:\\Users\\Nord\\source\\repos\\MoonRuneDemolisher\\MoonRuneDemolisher\\MoonRuneDemolisher.csproj",
+        "packagesPath": "C:\\Users\\Nord\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nord\\source\\repos\\MoonRuneDemolisher\\MoonRuneDemolisher\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\dmtin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nord\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,9 +30,10 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj": {
-                "projectPath": "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj"
+              "C:\\Users\\Nord\\source\\repos\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj": {
+                "projectPath": "C:\\Users\\Nord\\source\\repos\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj"
               }
             }
           }
@@ -41,10 +46,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Google.Cloud.Translation.V2": {
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -62,22 +68,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj": {
+    "C:\\Users\\Nord\\source\\repos\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj",
+        "projectUniqueName": "C:\\Users\\Nord\\source\\repos\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj",
         "projectName": "SoulsFormats",
-        "projectPath": "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj",
-        "packagesPath": "C:\\Users\\dmtin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dmtin\\Dev\\MoonRuneDemolisher\\SoulsFormats\\SoulsFormats\\obj\\",
+        "projectPath": "C:\\Users\\Nord\\source\\repos\\SoulsFormats\\SoulsFormats\\SoulsFormats.csproj",
+        "packagesPath": "C:\\Users\\Nord\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nord\\source\\repos\\SoulsFormats\\SoulsFormats\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\dmtin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nord\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -90,9 +100,11 @@
         },
         "frameworks": {
           "net46": {
+            "targetAlias": "net46",
             "projectReferences": {}
           },
           "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
         },
@@ -104,13 +116,21 @@
       },
       "frameworks": {
         "net46": {
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
-        },
-        "netstandard2.1": {
+          "targetAlias": "net46",
           "dependencies": {
             "System.Text.Encoding.CodePages": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[5.0.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        },
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -128,7 +148,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
